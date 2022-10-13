@@ -32,7 +32,7 @@ int main()
 	glViewport(0, 0, 800, 800);
 
 	// Specify the color of the background
-	glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 
 	// Clean the back buffer and assign the new color to it
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -40,12 +40,26 @@ int main()
 	// Swap the back buffer with the front buffer
 	glfwSwapBuffers(window);
 
+	float prev_time = float(glfwGetTime());
+	float angle = 0.0f;
 
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
 	{
+		float time = float(glfwGetTime());
+		if (time = prev_time >= 0.1f)
+		{
+			angle += 0.1f;
+			prev_time = time;
+		}
+
+		glClearColor(float(sin(angle)), float(cos(angle)), float(tanh(angle)), 1.0f);
+
+		glClear(GL_COLOR_BUFFER_BIT);
+		glfwSwapBuffers(window);
 		// Take care of all GLFW events
 		glfwPollEvents();
+
 	}
 
 	//Delete and terminate GLFW before ending the program
