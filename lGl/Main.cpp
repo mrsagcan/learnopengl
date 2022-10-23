@@ -72,19 +72,22 @@ int main()
 
 	GLfloat vertices[] =
 	{
-		-0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f,
-		0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f,
-		0.0f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f
+		-0.5f, -0.5f, 0.0f,
+		0.5, -0.5f, 0.0f,
+		-0.5f, 0.5f , 0.0f,
+		0.5f, -0.5f, 0.0f,
+		-0.5f, 0.5f, 0.0f,
+		0.5f, 0.5f, 0.0f
 	};
 
 
-	GLuint VAO, VBO;
+	GLuint VAOs[1], VBOs[1];
 
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
+	glGenVertexArrays(1, VAOs);
+	glGenBuffers(1, VBOs);
 
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindVertexArray(VAOs[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
 
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
@@ -102,8 +105,8 @@ int main()
 		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glUseProgram(shaderProgram);
-		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glBindVertexArray(VAOs[0]);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glfwSwapBuffers(window);
 
 		// Take care of all GLFW events
@@ -114,8 +117,8 @@ int main()
 
 	//Delete and terminate GLFW before ending the program
 
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
+	glDeleteVertexArrays(1, VAOs);
+	glDeleteBuffers(1, VBOs);
 
 	glfwDestroyWindow(window);
 	glfwTerminate();
