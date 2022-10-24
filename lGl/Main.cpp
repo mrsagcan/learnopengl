@@ -79,6 +79,8 @@ int main()
 
 	GLuint uniID = glGetUniformLocation(shaderProgram.ID, "scale");
 
+	float lastTime = 0.0f;
+	float scale = 0.0f;
 
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
@@ -88,7 +90,13 @@ int main()
 
 		// Tell OpenGL which Shader Program we want to use
 		shaderProgram.Activate();
-		glUniform1f(uniID, 0.5f);
+		if (glfwGetTime() - lastTime > 1.0f / 60.0f)
+		{
+			scale += 0.05f;
+			lastTime = glfwGetTime();
+		}
+
+		glUniform1f(uniID, 0.1f * sin(scale));
 		// Bind the VAO so OpenGL knows to use it
 		VAO1.Bind();
 		glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
