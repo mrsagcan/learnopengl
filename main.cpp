@@ -95,9 +95,15 @@ int main()
 
 	float vertices[] =
 	{
-		-0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f
+		//First
+		-0.9f, -0.3f, 0.0f,
+		 0.0f, -0.3f, 0.0f,
+		-0.45f, 0.3f, 0.0f,
+		//Second
+		 0.9f, -0.3f, 0.0f,
+		 0.0f, -0.3f, 0.0f,
+		 0.45f, 0.3f, 0.0f
+
 	};	
 
 	unsigned int VAO, VBO;
@@ -128,7 +134,7 @@ int main()
 		//drawing
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		//swap buffers, check events
 		glfwSwapBuffers(window);
